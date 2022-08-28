@@ -7,11 +7,11 @@ const getProductById = (req, res) => {
 const createNewProduct = (req, res) => {
   res.send(`Agrego un producto, solo para admins`);
 };
-const updateOneProduct = (req, res) => {
+const updateProduct = (req, res) => {
   res.send(`Modifico el producto id ${req.params.id}, solo para admins`);
 };
-const deleteOneProduct = (req, res) => {
+const deleteProduct = (req, res) => {
   res.send(`Elimino el producto id ${req.params.id}, solo para admins`);
 };
 
-module.exports = { getAllProducts, getProductById, createNewProduct, updateOneProduct, deleteOneProduct };
+module.exports = { getAllProducts, getProductById, createNewProduct, updateProduct, deleteProduct };
