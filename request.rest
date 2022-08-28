@@ -1,0 +1,37 @@
+// TESTEO DE RUTAS DE PRODUCTO
+
+GET http://localhost:8080/api/productos
+
+###
+GET http://localhost:8080/api/productos/idCarrito
+
+###
+POST http://localhost:8080/api/productos
+
+###
+PUT http://localhost:8080/api/productos/idProducto
+
+###
+DELETE http://localhost:8080/api/productos/idProducto
+
+
+// TESTEO DE RUTAS DE CARRITO
+###
+POST http://localhost:8080/api/carrito
+Content-Type: application/json
+
+{
+    "data": "Julian"
+}
+
+###
+DELETE http://localhost:8080/api/carrito/idCarrito
+
+###
+GET http://localhost:8080/api/carrito/idCarrito/productos
+
+###
+POST http://localhost:8080/api/carrito/idCarrito/productos
+
+###
+DELETE http://localhost:8080/api/carrito/idCarrito/productos/idProducto
