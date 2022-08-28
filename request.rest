@@ -35,3 +35,13 @@ POST http://localhost:8080/api/carrito/idCarrito/productos
 
 ###
 DELETE http://localhost:8080/api/carrito/idCarrito/productos/idProducto
+
+// TESTEO DE RUTAS NO IMPLEMENTADAS
+###
+GET http://localhost:8080/noimplementada
+###
+POST http://localhost:8080/noimplementada
+###
+PUT http://localhost:8080/noimplementada
+###
+DELETE  http://localhost:8080/noimplementada

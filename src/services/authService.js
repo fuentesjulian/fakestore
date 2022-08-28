@@ -1,8 +1,8 @@
 const isAdmin = false;
 
-const createError = (route, method) => {
+const createError = (route, method, errorCode) => {
   const error = {
-    error: -1,
+    error: errorCode,
   };
   if (route && method) {
     error.description = `ruta '${route}' metodo '${method}' no autorizado`;
@@ -13,8 +13,9 @@ const createError = (route, method) => {
 };
 
 const authService = (req, res, next) => {
+  const errorCode = -1;
   if (!isAdmin) {
-    res.json(createError(req.baseUrl, req.method));
+    res.json(createError(req.url, req.method, errorCode));
   } else {
     next();
   }
