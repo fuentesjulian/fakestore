@@ -14,20 +14,23 @@ const deleteCart = async (req, res) => {
   res.send(`Borro el carrito id ${req.params.id}`);
 };
 
-const getCartProducts = async (req, res) => {
+const getCart = async (req, res) => {
+  // obtengo los productos del carrito con el id especificado en params
   const cart = await cartService.getCart(req.params.id);
-  res.send(cart.products);
+  res.send(cart);
 };
 
 const addProduct = async (req, res) => {
+  // agrego un producto al carrito con el id especificado en params
   const { body } = req;
   const cart = await cartService.addProduct(req.params.id, body);
   res.send(cart);
 };
 
 const deleteProduct = async (req, res) => {
+  // elimino un producto
   const cart = await cartService.deleteProduct(req.params.id,req.params.id_prod)
   res.send(cart);
 };
 
-module.exports = { createNewCart, deleteCart, getCartProducts, addProduct, deleteProduct };
+module.exports = { createNewCart, deleteCart, getCart, addProduct, deleteProduct };

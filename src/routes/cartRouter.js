@@ -8,7 +8,7 @@ const cartController = require("../controllers/cartController")
 // declaro los metodos y las rutas que voy a utilizar para el cart
 cartRouter.post("/", cartController.createNewCart);
 cartRouter.delete("/:id", cartController.deleteCart);
-cartRouter.get("/:id/productos", cartController.getCartProducts);
+cartRouter.get("/:id/productos", cartController.getCart);
 cartRouter.post("/:id/productos", cartController.addProduct);
 cartRouter.delete("/:id/productos/:id_prod", cartController.deleteProduct);
 
