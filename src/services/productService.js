@@ -26,6 +26,7 @@ const createNewProduct = async (body) => {
   }
 };
 
+// actualizo un producto
 const updateProduct = async (id, body) => {
   // hago un destructuring para obtener las variables que necesito del body
   const { name, description, code, thumbnail, price, stock } = body;

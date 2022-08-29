@@ -9,7 +9,7 @@ const cartController = require("../controllers/cartController")
 cartRouter.post("/", cartController.createNewCart);
 cartRouter.delete("/:id", cartController.deleteCart);
 cartRouter.get("/:id/productos", cartController.getCartProducts);
-cartRouter.post("/:id/productos", cartController.addCartProduct);
-cartRouter.delete("/:id/productos/:id_prod", cartController.deleteCartProduct);
+cartRouter.post("/:id/productos", cartController.addProduct);
+cartRouter.delete("/:id/productos/:id_prod", cartController.deleteProduct);
 
 module.exports = cartRouter;

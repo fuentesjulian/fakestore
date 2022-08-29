@@ -1,23 +1,33 @@
 // controlador del cart, corre las funciones necesarias para cada response del router de carrito
+// traigo el servicios de carrito que corre las funciones de carrito
+const cartService = require("../services/cartService");
 
-const createNewCart = (req, res) => {
-  res.send(`Creo un carrito y devuelvo su id`);
+const createNewCart = async (req, res) => {
+  // creo un cart nuevo y traigo el id
+  const newCart = await cartService.createNewCart();
+  res.send(newCart);
 };
 
-const deleteCart = (req, res) => {
+const deleteCart = async (req, res) => {
+  // eliminio el carrito con el id especificado en params
+  await cartService.deleteCart(req.params.id);
   res.send(`Borro el carrito id ${req.params.id}`);
 };
 
-const getCartProducts = (req, res) => {
-  res.send(`Obtengo los productos del carrito id ${req.params.id}`);
+const getCartProducts = async (req, res) => {
+  const cart = await cartService.getCart(req.params.id);
+  res.send(cart.products);
 };
 
-const addCartProduct = (req, res) => {
-  res.send(`Agrego un producto al carrito id ${req.params.id}`);
+const addProduct = async (req, res) => {
+  const { body } = req;
+  const cart = await cartService.addProduct(req.params.id, body);
+  res.send(cart);
 };
 
-const deleteCartProduct = (req, res) => {
-  res.send(`Elimino el producto id ${req.params.id_prod} del carrito id ${req.params.id}`);
+const deleteProduct = async (req, res) => {
+  const cart = await cartService.deleteProduct(req.params.id,req.params.id_prod)
+  res.send(cart);
 };
 
-module.exports = { createNewCart, deleteCart, getCartProducts, addCartProduct, deleteCartProduct };
+module.exports = { createNewCart, deleteCart, getCartProducts, addProduct, deleteProduct };

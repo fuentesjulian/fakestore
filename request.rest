@@ -30,23 +30,31 @@ DELETE http://localhost:8080/api/productos/4
 // TESTEO DE RUTAS DE CARRITO
 ###
 POST http://localhost:8080/api/carrito
+
+###
+DELETE http://localhost:8080/api/carrito/5
+
+###
+GET http://localhost:8080/api/carrito/1/productos
+
+###
+POST http://localhost:8080/api/carrito/1/productos
 Content-Type: application/json
 
-{
-    "data": "Julian"
-}
-
+{"product": 
+    {
+        "name": "Remera",
+        "description": "Remera de los beatles",
+        "code": "R001",
+        "thumbnail": "https://backendbase.com/i/p/beatles-abbey-road-walk-white-t-shirt-f31b3.jpg",
+        "price": "30",
+        "quantity": 34,
+        "id": 32,
+        "timestamp": 1661729267139
+    }
+} 
 ###
-DELETE http://localhost:8080/api/carrito/idCarrito
-
-###
-GET http://localhost:8080/api/carrito/idCarrito/productos
-
-###
-POST http://localhost:8080/api/carrito/idCarrito/productos
-
-###
-DELETE http://localhost:8080/api/carrito/idCarrito/productos/idProducto
+DELETE http://localhost:8080/api/carrito/1/productos/32
 
 // TESTEO DE RUTAS NO IMPLEMENTADAS
 ###
