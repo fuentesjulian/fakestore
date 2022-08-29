@@ -5,9 +5,6 @@ GET http://localhost:8080/api/productos
 ###
 GET http://localhost:8080/api/productos/2
 
-###
-POST http://localhost:8080/api/productos
-
 ### 
 POST http://localhost:8080/api/productos
 Content-Type: application/json
@@ -17,14 +14,14 @@ Content-Type: application/json
 } 
 
 ###
-PUT http://localhost:8080/api/productos/4
+PUT http://localhost:8080/api/productos/8
 Content-Type: application/json
 
 {
-    "name":"Remera", "description":"Remera de los Beatles", "code":"R004", "thumbnail":"https://backendbase.com/i/p/beatles-abbey-road-walk-white-t-shirt-f31b3.jpg", "price":"30", "stock":17
+    "name":"Remera", "description":"Remera de los Beatles", "code":"R004", "thumbnail":"https://backendbase.com/i/p/beatles-abbey-road-walk-white-t-shirt-f31b3.jpg", "price":"30", "stock":23
 } 
 ###
-DELETE http://localhost:8080/api/productos/4
+DELETE http://localhost:8080/api/productos/8
 
 
 // TESTEO DE RUTAS DE CARRITO
@@ -32,7 +29,7 @@ DELETE http://localhost:8080/api/productos/4
 POST http://localhost:8080/api/carrito
 
 ###
-DELETE http://localhost:8080/api/carrito/5
+DELETE http://localhost:8080/api/carrito/7
 
 ###
 GET http://localhost:8080/api/carrito/1/productos
@@ -48,7 +45,7 @@ Content-Type: application/json
         "code": "R001",
         "thumbnail": "https://backendbase.com/i/p/beatles-abbey-road-walk-white-t-shirt-f31b3.jpg",
         "price": "30",
-        "quantity": 34,
+        "quantity": 22,
         "id": 32,
         "timestamp": 1661729267139
     }

@@ -6,26 +6,6 @@
     "thumbnail": "https://backendbase.com/i/p/beatles-abbey-road-walk-white-t-shirt-f31b3.jpg",
     "price": "30",
     "stock": 17,
-    "id": 2,
-    "timestamp": 1661729267139
-  },
-  {
-    "name": "Remera",
-    "description": "Remera de los Beatles",
-    "code": "R004",
-    "thumbnail": "https://backendbase.com/i/p/beatles-abbey-road-walk-white-t-shirt-f31b3.jpg",
-    "price": "30",
-    "stock": 17,
-    "id": 3,
-    "timestamp": 1661729286272
-  },
-  {
-    "name": "Remera",
-    "description": "Remera de los beatles",
-    "code": "R001",
-    "thumbnail": "https://backendbase.com/i/p/beatles-abbey-road-walk-white-t-shirt-f31b3.jpg",
-    "price": "30",
-    "stock": 17,
     "id": 5,
     "timestamp": 1661731152533
   },
@@ -35,18 +15,218 @@
     "code": "R001",
     "thumbnail": "https://backendbase.com/i/p/beatles-abbey-road-walk-white-t-shirt-f31b3.jpg",
     "price": "30",
-    "stock": 17,
+    "stock": "17",
     "id": 6,
     "timestamp": 1661742082325
   },
   {
     "name": "Remera",
     "description": "Remera de los beatles",
-    "code": "R001",
+    "code": "R001asdasd",
     "thumbnail": "https://backendbase.com/i/p/beatles-abbey-road-walk-white-t-shirt-f31b3.jpg",
     "price": "30",
-    "stock": 17,
+    "stock": "17",
     "id": 7,
     "timestamp": 1661742096262
+  },
+  {
+    "name": "Julian",
+    "description": "asdasd probando el 8!!!",
+    "code": "23123123456",
+    "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
+    "price": "12",
+    "stock": "123",
+    "id": 8,
+    "timestamp": 1661793574672
+  },
+  {
+    "name": "Nuevo prod",
+    "description": "Probando nuevamente.",
+    "code": "ae5467",
+    "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
+    "price": "120",
+    "stock": "10",
+    "id": 9,
+    "timestamp": 1661793616594
+  },
+  {
+    "name": "fakeStore",
+    "description": "Fake!",
+    "code": "fa010",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Colgate_logo_red.svg/799px-Colgate_logo_red.svg.png",
+    "price": "45",
+    "stock": "89",
+    "id": 10,
+    "timestamp": 1661793686177
+  },
+  {
+    "name": "Julian",
+    "description": "a",
+    "code": "asd",
+    "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
+    "price": "1",
+    "stock": "1",
+    "id": 12,
+    "timestamp": 1661793859005
+  },
+  {
+    "name": "Julian",
+    "description": "1",
+    "code": "asd",
+    "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
+    "price": "1",
+    "stock": "1",
+    "id": 13,
+    "timestamp": 1661793942139
+  },
+  {
+    "name": "Julian",
+    "description": "1",
+    "code": "1",
+    "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
+    "price": "100",
+    "stock": "1",
+    "id": 14,
+    "timestamp": 1661793999099
+  },
+  {
+    "name": "Julian",
+    "description": "1",
+    "code": "12323323",
+    "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
+    "price": "100",
+    "stock": "1",
+    "id": 15,
+    "timestamp": 1661794021860
+  },
+  {
+    "name": "Julian",
+    "description": "1",
+    "code": "12323323",
+    "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
+    "price": "100",
+    "stock": "1",
+    "id": 16,
+    "timestamp": 1661794130343
+  },
+  {
+    "name": "Julian",
+    "description": "1",
+    "code": "12323323",
+    "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
+    "price": "1",
+    "stock": "1",
+    "id": 17,
+    "timestamp": 1661794172964
+  },
+  {
+    "name": "Julian",
+    "description": "Descripcion",
+    "code": "12323323",
+    "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
+    "price": "11",
+    "stock": "12",
+    "id": 18,
+    "timestamp": 1661794784057
+  },
+  {
+    "name": "Julian",
+    "description": "Descripcion",
+    "code": "12323323",
+    "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
+    "price": "11",
+    "stock": "12",
+    "id": 19,
+    "timestamp": 1661794796664
+  },
+  {
+    "name": "Julian",
+    "description": "Descripcion",
+    "code": "12323323",
+    "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
+    "price": "11",
+    "stock": "12",
+    "id": 20,
+    "timestamp": 1661794798776
+  },
+  {
+    "name": "Julian",
+    "description": "3",
+    "code": "123",
+    "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
+    "price": "1",
+    "stock": "2",
+    "id": 21,
+    "timestamp": 1661794810289
+  },
+  {
+    "name": "Julian",
+    "description": "3",
+    "code": "12323323",
+    "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
+    "price": "1",
+    "stock": "2",
+    "id": 22,
+    "timestamp": 1661794918337
+  },
+  {
+    "name": "Julian",
+    "description": "3",
+    "code": "12323323",
+    "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
+    "price": "1",
+    "stock": "2",
+    "id": 23,
+    "timestamp": 1661794939080
+  },
+  {
+    "name": "Julian",
+    "description": "Descripcion",
+    "code": "12323323",
+    "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
+    "price": "100",
+    "stock": "1",
+    "id": 24,
+    "timestamp": 1661795001986
+  },
+  {
+    "name": "Julian",
+    "description": "3",
+    "code": "12323323",
+    "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
+    "price": "1",
+    "stock": "2",
+    "id": 25,
+    "timestamp": 1661795066993
+  },
+  {
+    "name": "Julian",
+    "description": "3",
+    "code": "12323323",
+    "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
+    "price": "1",
+    "stock": "2",
+    "id": 26,
+    "timestamp": 1661795077128
+  },
+  {
+    "name": "Julian",
+    "description": "3",
+    "code": "12323323",
+    "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
+    "price": "1",
+    "stock": "2",
+    "id": 27,
+    "timestamp": 1661795114075
+  },
+  {
+    "name": "fakeStore",
+    "description": "3",
+    "code": "12323323",
+    "thumbnail": "https://imborrable.com/wp-content/uploads/2021/04/fotos-gratis-de-stock-1.jpg",
+    "price": "1",
+    "stock": "2",
+    "id": 29,
+    "timestamp": 1661809447605
   }
 ]

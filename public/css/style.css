@@ -1,0 +1,28 @@
+#prod {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-areas: "prodInput prodOutput";
+}
+
+#prodInput {
+  grid-area: prodInput;
+}
+
+#prodInput textarea{
+    height: 4em;
+    resize: none;
+  }
+
+#prodOutput {
+  grid-area: prodOutput;
+}
+
+#prodOutput .card{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-code, .card-price, .card-stock{
+    font-size: smaller;
+    line-height: 0.5em;
+}
