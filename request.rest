@@ -3,16 +3,28 @@
 GET http://localhost:8080/api/productos
 
 ###
-GET http://localhost:8080/api/productos/idCarrito
+GET http://localhost:8080/api/productos/2
 
 ###
 POST http://localhost:8080/api/productos
 
-###
-PUT http://localhost:8080/api/productos/idProducto
+### 
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+
+{
+    "name":"Remera", "description":"Remera de los beatles", "code":"R001", "thumbnail":"https://backendbase.com/i/p/beatles-abbey-road-walk-white-t-shirt-f31b3.jpg", "price":"30", "stock":17
+} 
 
 ###
-DELETE http://localhost:8080/api/productos/idProducto
+PUT http://localhost:8080/api/productos/4
+Content-Type: application/json
+
+{
+    "name":"Remera", "description":"Remera de los Beatles", "code":"R004", "thumbnail":"https://backendbase.com/i/p/beatles-abbey-road-walk-white-t-shirt-f31b3.jpg", "price":"30", "stock":17
+} 
+###
+DELETE http://localhost:8080/api/productos/4
 
 
 // TESTEO DE RUTAS DE CARRITO

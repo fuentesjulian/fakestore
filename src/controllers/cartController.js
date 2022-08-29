@@ -1,3 +1,5 @@
+// controlador del cart, corre las funciones necesarias para cada response del router de carrito
+
 const createNewCart = (req, res) => {
   res.send(`Creo un carrito y devuelvo su id`);
 };

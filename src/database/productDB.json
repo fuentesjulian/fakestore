@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Remera",
+    "description": "Remera de los beatles",
+    "code": "R001",
+    "thumbnail": "https://backendbase.com/i/p/beatles-abbey-road-walk-white-t-shirt-f31b3.jpg",
+    "price": "30",
+    "stock": 17,
+    "id": 2,
+    "timestamp": 1661729267139
+  },
+  {
+    "name": "Remera",
+    "description": "Remera de los Beatles",
+    "code": "R004",
+    "thumbnail": "https://backendbase.com/i/p/beatles-abbey-road-walk-white-t-shirt-f31b3.jpg",
+    "price": "30",
+    "stock": 17,
+    "id": 3,
+    "timestamp": 1661729286272
+  },
+  {
+    "name": "Remera",
+    "description": "Remera de los beatles",
+    "code": "R001",
+    "thumbnail": "https://backendbase.com/i/p/beatles-abbey-road-walk-white-t-shirt-f31b3.jpg",
+    "price": "30",
+    "stock": 17,
+    "id": 5,
+    "timestamp": 1661731152533
+  }
+]
