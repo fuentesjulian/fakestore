@@ -3,6 +3,12 @@
 const CartContainer = require("../database/FileContainer");
 const cartContainer = new CartContainer("src/database/cartDB.json");
 
+// obtengo todos los carritos
+const getAllCarts = async () => {
+  const allCarts = await cartContainer.getAllItems();
+  return allCarts;
+};
+
 // creo un carrito
 const createNewCart = async () => {
   const newCart = await cartContainer.createNewItem();
@@ -59,4 +65,4 @@ const deleteProduct = async (cartId, prodId) => {
   return cart;
 };
 
-module.exports = { createNewCart, deleteCart, getCart, addProduct, deleteProduct };
+module.exports = { getAllCarts, createNewCart, deleteCart, getCart, addProduct, deleteProduct };

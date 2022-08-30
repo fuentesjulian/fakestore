@@ -2,6 +2,11 @@
 // traigo el servicios de carrito que corre las funciones de carrito
 const cartService = require("../services/cartService");
 
+const getAllCarts = async (req, res) => {
+  const allCarts = await cartService.getAllCarts();
+  res.send(allCarts);
+};
+
 const createNewCart = async (req, res) => {
   // creo un cart nuevo y traigo el id
   const newCart = await cartService.createNewCart();
@@ -29,8 +34,8 @@ const addProduct = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
   // elimino un producto
-  const cart = await cartService.deleteProduct(req.params.id,req.params.id_prod)
+  const cart = await cartService.deleteProduct(req.params.id, req.params.id_prod);
   res.send(cart);
 };
 
-module.exports = { createNewCart, deleteCart, getCart, addProduct, deleteProduct };
+module.exports = { getAllCarts, createNewCart, deleteCart, getCart, addProduct, deleteProduct };

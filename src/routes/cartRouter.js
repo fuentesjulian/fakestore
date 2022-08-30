@@ -3,9 +3,10 @@ const express = require("express");
 const { Router } = express;
 const cartRouter = new Router();
 // cargo el controlador del cart, con las funciones que van a correr por cada ruta
-const cartController = require("../controllers/cartController")
+const cartController = require("../controllers/cartController");
 
 // declaro los metodos y las rutas que voy a utilizar para el cart
+cartRouter.get("/", cartController.getAllCarts);
 cartRouter.post("/", cartController.createNewCart);
 cartRouter.delete("/:id", cartController.deleteCart);
 cartRouter.get("/:id/productos", cartController.getCart);
