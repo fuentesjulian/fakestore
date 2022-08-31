@@ -84,6 +84,7 @@ const addProd = async (prodId, cartId) => {
 
 const updateCartCount = (cart) => {
   let quantity = 0;
+  if (cartData.products?.length > 0) 
   cart.products.forEach((product) => {
     quantity += product.quantity;
   });

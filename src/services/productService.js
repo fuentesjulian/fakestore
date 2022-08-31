@@ -21,7 +21,7 @@ const createNewProduct = async (body) => {
   const { name, description, code, thumbnail, price, stock } = body;
   // checkeo que todas existan
   if (name && description && code && thumbnail && price && stock) {
-    const newProduct = await productContainer.createNewItem({ name, description, code, thumbnail, price, stock });
+    const newProduct = await productContainer.createNewItem({ name, description, code, thumbnail, price: parseFloat(price), stock });
     return newProduct;
   }
 };
@@ -32,7 +32,7 @@ const updateProduct = async (id, body) => {
   const { name, description, code, thumbnail, price, stock } = body;
   // checkeo que todas existan
   if (name && description && code && thumbnail && price && stock) {
-    const newItemData = { name, description, code, thumbnail, price, stock };
+    const newItemData = { name, description, code, thumbnail, price: parseFloat(price), stock };
     const updatedProduct = await productContainer.updateItem(id, newItemData);
     return updatedProduct;
   }

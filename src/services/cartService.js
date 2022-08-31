@@ -35,9 +35,11 @@ const addProduct = async (cartId, body) => {
     // busco el carrito al que debo agregar el producto
     const cart = await cartContainer.getItemById(cartId);
     // creo un nuevo producto para agregar
-    const newProd = { id, timestamp, name, description, code, thumbnail, price, quantity };
+    const newProd = { id, timestamp, name, description, code, thumbnail, price: parseFloat(price), quantity };
+    
     // si la cart tiene productos tengo que revisar si ya tengo ese producto en la cart para actualizar
     if (cart.products) {
+      
       // filtro y agrego el nuevo prod
       let products = cart.products.filter((prod) => prod.id != id);
       products.push(newProd);
