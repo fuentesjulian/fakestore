@@ -8,21 +8,32 @@
   grid-area: prodInput;
 }
 
-#prodInput textarea{
-    height: 4em;
-    resize: none;
-  }
+#prodInput textarea {
+  height: 4em;
+  resize: none;
+}
 
 #prodOutput {
   grid-area: prodOutput;
 }
 
-#prodOutput .card{
-    margin-left: auto;
-    margin-right: auto;
+#prodOutput .card {
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.card-code, .card-price, .card-stock{
-    font-size: smaller;
-    line-height: 0.5em;
+.card-code,
+.card-price,
+.card-stock {
+  font-size: smaller;
+  line-height: 0.5em;
+}
+
+.card {
+  margin: 1em;
+}
+
+#prods{
+  display: flex;  
+  flex-wrap: wrap;
 }
