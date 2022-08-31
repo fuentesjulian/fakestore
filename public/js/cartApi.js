@@ -6,8 +6,8 @@ export const cartApi = {
   getIds: () => {
     return fetch("/api/carrito").then((data) => data.json());
   },
-  postProd: (cartId, prodId) => {
-    const data = { id: prodId };
+  postProd: (cartId, product) => {
+    const data = { product: product };
     const options = {
       method: "POST",
       headers: {
