@@ -21,30 +21,16 @@ const getData = async () => {
   productData = await productsApi.get();
   loadProducts(productData);
   updateCartCount(cartData);
-};
-
-const createCard = (product) => {
-  const { name, code, thumbnail, price, stock, description, id } = product;
-  const html = `<div class="card" style="width: 18rem;" id=prod-${id}>
-  <img src="${thumbnail}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">${name}</h5>
-    <p class="card-code">Codigo: ${code}</p>
-    <p class="card-price">Precio: ${price}</p>
-    <p class="card-stock">Stock: ${stock}</p>
-    <p class="card-text">${description}</p>
-  </div>
-  </div>`;
-  return html;
+  createCartModal(cartData);
 };
 
 /* esta función sirve para cargar los productos al HTML */
-function loadProducts(productos) {
+function loadProducts(products) {
   const prods = document.getElementById("prods");
   /* volvi a la version anterior de carga, es mas corto el codigo */
   prods.innerHTML = "";
   /* #OPTIMIZACION desestructuracion de parametros */
-  productos.forEach(({ name, code, thumbnail, price, stock, description, id }) => {
+  products.forEach(({ name, code, thumbnail, price, stock, description, id }) => {
     /* agrego cada producto al articulo dentro del body en el html */
     const plantilla = document.createElement("div");
     plantilla.className = "card";
@@ -72,8 +58,6 @@ function loadProducts(productos) {
 
 const addProd = async (prodId, cartId) => {
   let product = productData.find((prod) => prod.id === prodId);
-  console.log(product);
-
   if (cartData.products?.length > 0) {
     if (cartData.products.some((prod) => prod.id === product.id)) {
       const quantity = cartData.products.find((prod) => prod.id === product.id).quantity + 1;
@@ -84,10 +68,9 @@ const addProd = async (prodId, cartId) => {
   } else {
     product = { ...product, quantity: 1 };
   }
-  console.log(product);
+
   await cartApi.postProd(cartId, product);
   cartData = await cartApi.getProds(cartId);
-  console.log(cartData);
   updateCartCount(cartData);
   Toastify({
     text: `${product.name} agregado a carrito`,
@@ -96,6 +79,7 @@ const addProd = async (prodId, cartId) => {
       background: "linear-gradient(to right, #666666, #666666)"
     }
   }).showToast();
+  createCartModal(cartData);
 };
 
 const updateCartCount = (cart) => {
@@ -106,6 +90,47 @@ const updateCartCount = (cart) => {
 
   cartCount.innerHTML = `<i class="bi bi-cart"></i> ${quantity}`;
 };
+
+function createCartModal(cart) {
+  const itemsCarrito = document.getElementById("itemsCarrito");
+  /* limpio el html */
+  itemsCarrito.innerHTML = "";
+  /* primero checkeo si el carrito esta vacio */
+  if (cart.products?.length > 0) {
+    btnLimpiarCarrito.disabled = false;
+    /* #OPTIMIZACION con destructuracion */
+    cart.products.forEach(({ id, subTotal, quantity, thumbnail, name, price, stock }) => {
+      const itemCarrito = document.createElement("li");
+      itemCarrito.className = "list-group-item";
+      /* uso el input numerico con un max que sea igual al stock */
+      itemCarrito.innerHTML = `<div class="imagen"><img src="img/${thumbnail}" alt="" /></div>
+        <div class="texto">
+          <div class="nombre">${name}</div>
+          <div class="stock">#SKU ${id} - stock ${stock} unidades</div>
+          <div class="precio-unit">Precio unitario $ ${price.toLocaleString()}</div>
+        </div>
+        <div class="cantidad">${quantity}</div>
+        <div class="eliminar" id="eliminar-${id}"><i class="bi bi-trash"></i></div>`;
+      itemsCarrito.appendChild(itemCarrito);
+      const btnEliminarItem = document.getElementById(`eliminar-${id}`);
+      btnEliminarItem.onclick = () => {
+        deleteProd(cartId, id);
+      };
+    });
+  } else {
+    btnLimpiarCarrito.disabled = true;
+    itemsCarrito.innerHTML = "Carrito vacio";
+  }
+}
+
+const deleteProd = async (cartId, prodId) => {
+  await cartApi.deleteProd(cartId, prodId);
+  cartData = await cartApi.getProds(cartId);
+  updateCartCount(cartData);
+  createCartModal(cartData);
+};
+
+
 
 /* corro la funcion de actualizarHTML cuando carga el DOM */
 document.addEventListener("DOMContentLoaded", getData());
