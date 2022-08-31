@@ -97,7 +97,6 @@ function createCartModal(cart) {
   itemsCarrito.innerHTML = "";
   /* primero checkeo si el carrito esta vacio */
   if (cart.products?.length > 0) {
-    btnLimpiarCarrito.disabled = false;
     /* #OPTIMIZACION con destructuracion */
     cart.products.forEach(({ id, subTotal, quantity, thumbnail, name, price, stock }) => {
       const itemCarrito = document.createElement("li");
@@ -118,7 +117,6 @@ function createCartModal(cart) {
       };
     });
   } else {
-    btnLimpiarCarrito.disabled = true;
     itemsCarrito.innerHTML = "Carrito vacio";
   }
 }
@@ -129,7 +127,6 @@ const deleteProd = async (cartId, prodId) => {
   updateCartCount(cartData);
   createCartModal(cartData);
 };
-
 
 
 /* corro la funcion de actualizarHTML cuando carga el DOM */

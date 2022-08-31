@@ -9,6 +9,33 @@
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
+    <header><img src="../img/logo.PNG" alt="" /></header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Admin
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="nuevo.html">Crear producto</a></li>
+                <li><a class="dropdown-item" href="editar.html">Editar productos</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="carritos.html">Ver carritos</a></li>
+              </ul>
+            </li>
+          </ul>
+          <div id="cartCount" data-bs-toggle="modal" data-bs-target="#modalCarrito">Admin</div>
+        </div>
+      </div>
+    </nav>
     <div class="container">
       <h2>Elije el producto por id</h2>
       <div id="prod">
@@ -51,6 +78,7 @@
         <div id="prodOutput"><div style="text-align: center;">Aqui veras el producto seleccionado</div></div>
       </div>
     </div>
+    <footer>Loopa SA - Todos los derechos reservados.</footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="../js/editProduct.js"></script>
   </body>
