@@ -51,9 +51,7 @@ class FileContainer {
 
   async updateItem(id, itemData) {
     // corro getAllItems para obtener todos los items en forma de array
-    console.log(itemData)
     let items = await this.getAllItems();
-    console.log(items)
     // primero checkea que exista un producto con el id indicado, sino no puede actualizar
     if (!items.some((item) => parseInt(item.id) === parseInt(id))) return { error: "producto no encontrado" };
     // actualizo con un map al objeto del array que tenga un id que coincida con el id que recibo como parametro
