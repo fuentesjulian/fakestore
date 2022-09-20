@@ -1,7 +1,9 @@
 // servicio de productos que corre las funciones epecificas a cada producto
 // traigo un FileContainer para interactuar con productDB.json
-import { FileContainer } from "../database/FileContainer.js";
-const productContainer = new FileContainer("src/database/productDB.json");
+// import { FileContainer } from "../database/FileContainer.js";
+// const productContainer = new FileContainer("src/database/productDB.json");
+
+import { productosDao as productContainer } from "../daos/index.js";
 
 // traigo un producto por id
 const getProductById = async (id) => {

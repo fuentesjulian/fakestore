@@ -14,11 +14,17 @@ const getData = async () => {
     cartData = await cartApi.getProds(cartId);
   } else {
     cartData = await cartApi.createCart();
-    cartId = cartData.id;
+    cartId = cartData.id ?? cartData._id;
+    cartData.products.forEach((prod) => {
+      if (!prod.id) prod.id = prod._id;
+    });
     localStorage.setItem("cartId", cartId);
   }
 
   productData = await productsApi.get();
+  productData.forEach((prod) => {
+    if (!prod.id) prod.id = prod._id;
+  });
   loadProducts(productData);
   updateCartCount(cartData);
   createCartModal(cartData);
@@ -59,6 +65,7 @@ function loadProducts(products) {
 const addProd = async (prodId, cartId) => {
   let product = productData.find((prod) => prod.id === prodId);
   if (cartData.products?.length > 0) {
+    
     if (cartData.products.some((prod) => prod.id === product.id)) {
       const quantity = cartData.products.find((prod) => prod.id === product.id).quantity + 1;
       product = { ...product, quantity: quantity };
@@ -84,10 +91,10 @@ const addProd = async (prodId, cartId) => {
 
 const updateCartCount = (cart) => {
   let quantity = 0;
-  if (cartData.products?.length > 0) 
-  cart.products.forEach((product) => {
-    quantity += product.quantity;
-  });
+  if (cartData.products?.length > 0)
+    cart.products.forEach((product) => {
+      quantity += product.quantity;
+    });
 
   cartCount.innerHTML = `<i class="bi bi-cart"></i> ${quantity}`;
 };
@@ -128,7 +135,6 @@ const deleteProd = async (cartId, prodId) => {
   updateCartCount(cartData);
   createCartModal(cartData);
 };
-
 
 /* corro la funcion de actualizarHTML cuando carga el DOM */
 document.addEventListener("DOMContentLoaded", getData());

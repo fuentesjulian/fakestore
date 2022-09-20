@@ -21,6 +21,7 @@ newProdForm.addEventListener("submit", (e) => {
 });
 
 const createCard = (product) => {
+  console.log(product)
   const { name, code, thumbnail, price, stock, description, id } = product;
   const html = `<div class="card" style="width: 18rem;" id=prod-${id}>
 <img src="${thumbnail}" class="card-img-top" alt="...">

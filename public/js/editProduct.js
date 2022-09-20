@@ -11,6 +11,7 @@ const getData = async () => {
   data = await productsApi.get();
   let html = "<option value='-1'>Choose...</option>";
   data.forEach((product) => {
+    if(!product.id) product.id = product._id;
     html += `<option value="${product.id}">${product.id}</option>`;
   });
   editProdForm.reset();
@@ -21,8 +22,10 @@ const getData = async () => {
 document.addEventListener("DOMContentLoaded", getData());
 
 idSelect.addEventListener("change", () => {
-  if (idSelect.value > 0) {
-    const product = data.find((product) => product.id === parseInt(idSelect.value));
+  if (idSelect.value !=-1) {
+    const product = data.find((product) => String(product.id) === idSelect.value);
+    console.log(idSelect.value)
+    console.log(data)
     editProdForm[1].value = product.name;
     editProdForm[2].value = product.code;
     editProdForm[3].value = product.thumbnail;

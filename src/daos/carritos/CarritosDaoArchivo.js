@@ -3,7 +3,7 @@ import ContenedorArchivo from "../../contenedores/ContenedorArchivo.js"
 class CarritosDaoArchivo extends ContenedorArchivo {
 
     constructor() {
-        super('carritos.json')
+        super('src/database/cartDB.json')
     }
 
     async guardar(carrito = { productos: [] }) {

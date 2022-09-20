@@ -1,7 +1,9 @@
 // servicio de productos que corre las funciones epecificas a cada producto
 // traigo un FileContainer para interactuar con productDB.json
-import { FileContainer } from "../database/FileContainer.js";
-const cartContainer = new FileContainer("src/database/cartDB.json");
+// import { FileContainer } from "../database/FileContainer.js";
+// const cartContainer = new FileContainer("src/database/cartDB.json");
+
+import { carritosDao as cartContainer } from "../daos/index.js";
 
 // obtengo todos los carritos
 const getAllCarts = async () => {
@@ -29,30 +31,31 @@ const getCart = async (cartId) => {
 // agrego un producto
 const addProduct = async (cartId, body) => {
   const product = body.product;
+
   // checkeo que el producto tenga todas las variables necesarias
   const { id, timestamp, name, description, code, thumbnail, price, quantity } = product;
-  if (id && timestamp && name && description && code && thumbnail && price && quantity) {
-    // busco el carrito al que debo agregar el producto
-    const cart = await cartContainer.getItemById(cartId);
-    // creo un nuevo producto para agregar
-    const newProd = { id, timestamp, name, description, code, thumbnail, price: parseFloat(price), quantity };
-    
-    // si la cart tiene productos tengo que revisar si ya tengo ese producto en la cart para actualizar
-    if (cart.products) {
-      
-      // filtro y agrego el nuevo prod
-      let products = cart.products.filter((prod) => prod.id != id);
-      products.push(newProd);
-      cart.products = products;
-    } else {
-      cart.products = [];
-      cart.products.push(newProd);
-    }
-    // actualizo la base de datos
-    await cartContainer.updateItem(cartId, cart);
-    // devuelvo la cart nueva
-    return cart;
+
+  // busco el carrito al que debo agregar el producto
+
+  const cart = await cartContainer.getItemById(cartId);
+  // creo un nuevo producto para agregar
+  const newProd = { id, timestamp, name, description, code, thumbnail, price: parseFloat(price), quantity };
+
+  // si la cart tiene productos tengo que revisar si ya tengo ese producto en la cart para actualizar
+  if (cart.products) {
+    // filtro y agrego el nuevo prod
+    let products = cart.products.filter((prod) => prod.id != id);
+    products.push(newProd);
+    cart.products = products;
+  } else {
+    cart.products = [];
+    cart.products.push(newProd);
   }
+
+  // actualizo la base de datos
+  await cartContainer.updateItem(cartId, cart);
+  // devuelvo la cart nueva
+  return cart;
 };
 
 // borro un producto de la cart

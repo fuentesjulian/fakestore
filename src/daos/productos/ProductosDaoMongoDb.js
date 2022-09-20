@@ -4,9 +4,12 @@ class ProductosDaoMongoDb extends ContenedorMongoDb {
 
     constructor() {
         super('productos', {
-            title: { type: String, required: true },
-            price: { type: Number, required: true },
+            name: { type: String, required: true },
+            code: { type: String},
             thumbnail: { type: String, required: true },
+            price: { type: Number, required: true },
+            stock: { type: Number },
+            description: { type: String, required: true },
         })
     }
 }
