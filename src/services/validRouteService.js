@@ -1,7 +1,7 @@
 // creo el error para las rutas no implementadas
 const createError = (route, method, errorCode) => {
   const error = {
-    error: errorCode,
+    error: errorCode
   };
   if (route && method) {
     error.description = `ruta '${route}' metodo '${method}' no implementada`;
@@ -17,4 +17,4 @@ const validRouteService = (req, res) => {
   res.json(createError(req.url, req.method, errorCode));
 };
 
-module.exports = validRouteService;
+export { validRouteService };

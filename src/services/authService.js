@@ -4,7 +4,7 @@ const isAdmin = true;
 // crea el msj de error
 const createError = (route, method, errorCode) => {
   const error = {
-    error: errorCode,
+    error: errorCode
   };
   if (route && method) {
     error.description = `ruta '${route}' metodo '${method}' no autorizado`;
@@ -15,7 +15,7 @@ const createError = (route, method, errorCode) => {
 };
 
 // funcion que actua como middleware para los metodos POST, PUT y DELETE dentro del router de productos
-const authService = (req, res, next) => {
+export const authService = (req, res, next) => {
   const errorCode = -1;
   if (!isAdmin) {
     res.json(createError(req.url, req.method, errorCode));
@@ -23,5 +23,3 @@ const authService = (req, res, next) => {
     next();
   }
 };
-
-module.exports = authService;

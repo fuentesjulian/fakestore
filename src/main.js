@@ -1,5 +1,5 @@
 // importo server.js
-const app = require("./server");
+import app from "./server.js"
 // declaro el puerto
 const PORT = process.env.PORT || 8080;
 // corro app

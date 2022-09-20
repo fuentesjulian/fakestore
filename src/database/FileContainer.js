@@ -1,6 +1,6 @@
-const { promises: fs } = require("fs");
+import { promises as fs } from 'fs';
 
-class FileContainer {
+export class FileContainer {
   constructor(filePath) {
     this.filePath = filePath;
   }
@@ -92,4 +92,4 @@ class FileContainer {
   }
 }
 
-module.exports = FileContainer;
+

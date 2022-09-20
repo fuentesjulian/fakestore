@@ -1,6 +1,6 @@
 // controlador de productos, corre las funciones necesarias para cada response del router de productos
 // traigo el servicios de productos que corre las funciones de los productos
-const productService = require("../services/productService");
+import * as productService from "../services/productService.js";
 
 const getAllProducts = async (req, res) => {
   // traigo todos los productos
@@ -39,4 +39,4 @@ const deleteProduct = async (req, res) => {
   res.send(`Elimino el producto id ${req.params.id}, solo para admins`);
 };
 
-module.exports = { getAllProducts, getProductById, createNewProduct, updateProduct, deleteProduct };
+export { getAllProducts, getProductById, createNewProduct, updateProduct, deleteProduct };

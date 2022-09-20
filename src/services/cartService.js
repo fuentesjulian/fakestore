@@ -1,7 +1,7 @@
 // servicio de productos que corre las funciones epecificas a cada producto
 // traigo un FileContainer para interactuar con productDB.json
-const CartContainer = require("../database/FileContainer");
-const cartContainer = new CartContainer("src/database/cartDB.json");
+import { FileContainer } from "../database/FileContainer.js";
+const cartContainer = new FileContainer("src/database/cartDB.json");
 
 // obtengo todos los carritos
 const getAllCarts = async () => {
@@ -67,4 +67,4 @@ const deleteProduct = async (cartId, prodId) => {
   return cart;
 };
 
-module.exports = { getAllCarts, createNewCart, deleteCart, getCart, addProduct, deleteProduct };
+export { getAllCarts, createNewCart, deleteCart, getCart, addProduct, deleteProduct };

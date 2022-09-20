@@ -1,7 +1,8 @@
-const express = require("express");
-const productRouter = require("./routes/productRouter");
-const cartRouter = require("./routes/cartRouter");
-const validRouteService = require("./services/validRouteService")
+import express from "express";
+import productRouter from "./routes/productRouter.js";
+import cartRouter from "./routes/cartRouter.js";
+import { validRouteService } from "./services/validRouteService.js";
+
 const app = express();
 
 // configuro el servidor
@@ -19,4 +20,4 @@ app.use("/api/carrito", cartRouter);
 app.all("*", validRouteService);
 
 // exporto app
-module.exports = app;
+export default app;

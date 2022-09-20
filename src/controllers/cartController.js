@@ -1,6 +1,6 @@
 // controlador del cart, corre las funciones necesarias para cada response del router de carrito
 // traigo el servicios de carrito que corre las funciones de carrito
-const cartService = require("../services/cartService");
+import * as cartService from "../services/cartService.js"
 
 const getAllCarts = async (req, res) => {
   const allCarts = await cartService.getAllCarts();
@@ -38,4 +38,4 @@ const deleteProduct = async (req, res) => {
   res.send(cart);
 };
 
-module.exports = { getAllCarts, createNewCart, deleteCart, getCart, addProduct, deleteProduct };
+export { getAllCarts, createNewCart, deleteCart, getCart, addProduct, deleteProduct };

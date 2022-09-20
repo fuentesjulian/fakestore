@@ -1,11 +1,11 @@
 // router para los productos
-const express = require("express");
+import express from "express";
 const { Router } = express;
 const productRouter = new Router();
 // cargo el controlador de productos, con las funciones que van a correr por cada ruta
-const productController = require("../controllers/productController");
+import * as productController from "../controllers/productController.js";
 // cargo el servicio de autentificacion que checkea si estoy loggeado
-const authService = require("../services/authService");
+import { authService } from "../services/authService.js";
 
 // declaro los metodos y las rutas que voy a utilizar para los productos
 productRouter
@@ -16,4 +16,4 @@ productRouter
   .put("/:id", authService, productController.updateProduct)
   .delete("/:id", authService, productController.deleteProduct);
 
-module.exports = productRouter;
+export default productRouter;
