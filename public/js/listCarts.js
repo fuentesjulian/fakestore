@@ -12,7 +12,7 @@ const getData = async () => {
         prodHtml += `<p>ID ${product.id} - ${product.name} - ${product.quantity} unidades - $${product.price} por unidad</p>`;
       });
     }
-    cartHtml += `<h5>Cart Id ${cart.id} - timestamp ${cart.timestamp}</h5>${prodHtml}`;
+    cartHtml += `<h5>Cart Id ${cart.id}</h5>${prodHtml}`;
   });
   carts.innerHTML = cartHtml;
 };

@@ -15,13 +15,14 @@ const getData = async () => {
   } else {
     cartData = await cartApi.createCart();
     cartId = cartData.id ?? cartData._id;
-    cartData.products.forEach((prod) => {
+    cartData.products?.forEach((prod) => {
       if (!prod.id) prod.id = prod._id;
     });
     localStorage.setItem("cartId", cartId);
   }
 
   productData = await productsApi.get();
+
   productData.forEach((prod) => {
     if (!prod.id) prod.id = prod._id;
   });
@@ -106,17 +107,18 @@ function createCartModal(cart) {
   /* primero checkeo si el carrito esta vacio */
   if (cart.products?.length > 0) {
     /* #OPTIMIZACION con destructuracion */
-    cart.products.forEach(({ id, subTotal, quantity, thumbnail, name, price, stock }) => {
+    console.log(cart.products)
+    cart.products.forEach(({ id, quantity, thumbnail, name, price }) => {
       const itemCarrito = document.createElement("li");
       itemCarrito.className = "list-group-item";
       /* uso el input numerico con un max que sea igual al stock */
       itemCarrito.innerHTML = `<div class="imagen"><img src="img/${thumbnail}" alt="" /></div>
         <div class="texto">
           <div class="nombre">${name}</div>
-          <div class="stock">#SKU ${id} - stock ${stock} unidades</div>
+          <div class="stock">#SKU ${id}</div>
           <div class="precio-unit">Precio unitario $ ${price.toLocaleString()}</div>
         </div>
-        <div class="cantidad">${quantity}</div>
+        <div class="cantidad">${quantity} un pedidas</div>
         <div class="eliminar" id="eliminar-${id}"><i class="bi bi-trash"></i></div>`;
       itemsCarrito.appendChild(itemCarrito);
       const btnEliminarItem = document.getElementById(`eliminar-${id}`);

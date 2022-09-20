@@ -1,7 +1,7 @@
 let productosDao;
 let carritosDao;
-import dotenv from "dotenv"
-dotenv.config()
+import dotenv from "dotenv";
+dotenv.config();
 
 switch (process.env.PERS) {
   case "json":
@@ -12,6 +12,11 @@ switch (process.env.PERS) {
     carritosDao = new CarritosDaoArchivo();
     break;
   case "firebase":
+    const { default: ProductosDaoFirebase } = await import("./productos/ProductosDaoFirebase.js");
+    const { default: CarritosDaoFirebase } = await import("./carritos/CarritosDaoFirebase.js");
+
+    productosDao = new ProductosDaoFirebase();
+    carritosDao = new CarritosDaoFirebase();
     break;
   case "mongodb":
     const { default: ProductosDaoMongoDb } = await import("./productos/ProductosDaoMongoDb.js");

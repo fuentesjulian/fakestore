@@ -21,9 +21,10 @@ const getAllProducts = async () => {
 const createNewProduct = async (body) => {
   // hago un destructuring para obtener las variables que necesito del body
   const { name, description, code, thumbnail, price, stock } = body;
+  const timestamp= Date.now()
   // checkeo que todas existan
   if (name && description && code && thumbnail && price && stock) {
-    const newProduct = await productContainer.createNewItem({ name, description, code, thumbnail, price: parseFloat(price), stock });
+    const newProduct = await productContainer.createNewItem({ name, description, code, thumbnail, price: parseFloat(price), stock,timestamp });
     return newProduct;
   }
 };

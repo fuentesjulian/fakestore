@@ -20,12 +20,10 @@ class ContenedorMongoDb {
 
   async createNewItem(nuevoElem) {
     const elemento = await this.coleccion.insertMany(nuevoElem);
-    console.log(elemento);
     return elemento[0];
   }
 
   async updateItem(id, nuevoElem) {
-    console.log(nuevoElem);
     await this.coleccion.updateOne({ _id: id }, { $set: { ...nuevoElem } });
     const elemento = await this.coleccion.find({ _id: id });
     return elemento;
