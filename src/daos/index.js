@@ -1,9 +1,9 @@
 let productosDao;
 let carritosDao;
+import dotenv from "dotenv"
+dotenv.config()
 
-const persistencia = "mongodb";
-//switch (process.env.PERS) {
-switch (persistencia) {
+switch (process.env.PERS) {
   case "json":
     const { default: ProductosDaoArchivo } = await import("./productos/ProductosDaoArchivo.js");
     const { default: CarritosDaoArchivo } = await import("./carritos/CarritosDaoArchivo.js");
