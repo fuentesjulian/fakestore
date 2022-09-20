@@ -1,32 +1,37 @@
+// uso la clase ProductosApi del template del profe
 class ContenedorMemoria {
+  constructor() {
+    this.elementos = [];
+    this.id = 0;
+  }
 
-    constructor() {
-        this.elementos = []
-    }
+  getItemById(id) {
+    const producto = this.elementos.find((prod) => prod.id === parseInt(id));
+    return producto;
+  }
 
-    listar(id) {
-        
-    }
+  getAllItems() {
+    return this.elementos;
+  }
 
-    listarAll() {
-        
-    }
+  createNewItem(prod) {
+    this.elementos.push({ id: ++this.id, ...prod });
+    return this.getItemById(this.id);
+  }
 
-    guardar(elem) {
+  updateItem(id, prod) {
+    this.elementos = this.elementos.map((producto) => {
+      if (producto.id === parseInt(id)) return { id: parseInt(id), ...prod };
+    });
+    return this.getItemById(id);
+  }
 
-    }
+  deleteItem(id) {
+    this.elementos = this.elementos.filter((prod) => prod.id != parseInt(id));
+  }
 
-    actualizar(elem) {
- 
-    }
-
-    borrar(id) {
-
-    }
-
-    borrarAll() {
-    
-    }
+  deleteAll() {
+    this.elementos = [];
+  }
 }
-
-export default ContenedorMemoria
+export default ContenedorMemoria;

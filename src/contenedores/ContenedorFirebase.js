@@ -21,7 +21,6 @@ class ContenedorFirebase {
   }
 
   async getAllItems() {
-
     const querySnapshot = await this.coleccion.get();
     let docs = querySnapshot.docs;
     const response = docs.map((doc) => ({
@@ -33,13 +32,13 @@ class ContenedorFirebase {
   }
 
   async createNewItem(nuevoElem) {
-    const res = await this.coleccion.add({...nuevoElem});
+    const res = await this.coleccion.add({ ...nuevoElem });
     return this.getItemById(res.id);
   }
 
   async updateItem(id, nuevoElem) {
     const doc = this.coleccion.doc(`${id}`);
-    const item = await doc.update({...nuevoElem});
+    const item = await doc.update({ ...nuevoElem });
     return this.getItemById(id);
   }
 
@@ -48,7 +47,12 @@ class ContenedorFirebase {
     await doc.delete();
   }
 
-  async deleteAll() {}
+  async deleteAll() {
+    const querySnapshot = await this.coleccion.get();
+    querySnapshot.docs.forEach(async (snapshot) => {
+      await snapshot.ref.delete();
+    });
+  }
 }
 
 export default ContenedorFirebase;
