@@ -1,41 +1,99 @@
 import mongoose from "mongoose";
-import config from "../config.js";
+import * as objectUtils from "../utils/objectUtils.js";
+import * as dotenv from "dotenv";
 
-await mongoose.connect(config.mongodb.cnxStr, config.mongodb.options);
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
 
-class ContenedorMongoDb {
-  constructor(nombreColeccion, esquema) {
-    this.coleccion = mongoose.model(nombreColeccion, esquema);
+dotenv.config();
+
+await mongoose.connect(process.env.MONGOBD_CONNECTION_STRING, options);
+
+
+export default class MongoDbContainer {
+  constructor(collectionString, schema) {
+    this.model = mongoose.model(collectionString, schema);
   }
 
-  async getItemById(id) {
-    const elemento = await this.coleccion.find({ _id: id });
-    return elemento[0];
+  async getById(id) {
+    try {
+      const data = await this.model.findOne({ _id: id });
+      const plainData = objectUtils.returnPlainObj(data);
+      if (plainData === null) {
+        return plainData;
+      } else {
+        const item = objectUtils.renameField(plainData, "_id", "id");
+        return item;
+      }
+    } catch (error) {
+console.log(error)
+    }
   }
 
-  async getAllItems() {
-    const elementos = await this.coleccion.find({});
-    return elementos;
+  async getAll() {
+    try {
+      const data = await this.model.find({});
+      const plainData = objectUtils.returnPlainObj(data);
+      if (plainData.length) {
+        const items = plainData.map((item) => objectUtils.renameField(item, "_id", "id"));
+        return items;
+      } else {
+        return plainData;
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  async createNewItem(nuevoElem) {
-    const elemento = await this.coleccion.insertMany(nuevoElem);
-    return elemento[0];
+  async getByField(field, criteria) {
+    try {
+      const data = await this.model.findOne().where(field).equals(criteria);
+      const plainData = objectUtils.returnPlainObj(data);
+      if (plainData === null) {
+        return plainData;
+      } else {
+        const item = objectUtils.renameField(plainData, "_id", "id");
+        return item;
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  async updateItem(id, nuevoElem) {
-    await this.coleccion.updateOne({ _id: id }, { $set: { ...nuevoElem } });
-    const elemento = await this.coleccion.find({ _id: id });
-    return elemento;
+  async createNew(itemData) {
+    try {
+      const data = await this.model.create(itemData);
+      const plainData = objectUtils.returnPlainObj(data);
+      const newItem = objectUtils.renameField(plainData, "_id", "id");
+      return newItem;
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  async deleteItem(id) {
-    await this.coleccion.deleteOne({ _id: id });
+  async updateById(id, itemData) {
+    try {
+      await this.model.updateOne({ _id: id }, { $set: { ...itemData } });
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async deleteById(id) {
+    try {
+      await this.model.deleteOne({ _id: id });
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async deleteAll() {
-    await this.coleccion.deleteMany({});
+    try {
+      await this.model.deleteMany({});
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
-
-export default ContenedorMongoDb;
