@@ -1,6 +1,7 @@
 import MongoDbContainer from "../contenedores/ContenedorMongoDB.js";
 import * as userConfig from "../config/users.js";
 import bcrypt from "bcrypt";
+import * as emailer from "../services/emailer.js";
 
 const userContainer = new MongoDbContainer(
   userConfig.userCollection,
@@ -26,8 +27,18 @@ export const login = async (email, password, done) => {
 };
 
 export const signup = async (req, email, password, done) => {
-  const { nombre, direccion, edad, telefono, avatar } =
-    req.body;
+  const { nombre, direccion, edad, telefono } = req.body;
+
+  if (
+    !nombre ||
+    !direccion ||
+    !edad ||
+    !telefono ||
+    !email ||
+    !password ||
+    !req.file
+  )
+    return done(null, false);
   try {
     const user = await userContainer.getByField("email", email);
     if (user) {
@@ -43,14 +54,15 @@ export const signup = async (req, email, password, done) => {
         direccion,
         edad,
         telefono,
-        avatar,
+        avatar: req.file.filename,
       };
       const newUser = await userContainer.createNew(userData);
+      emailer.nuevoRegistro(userData);
       return done(null, newUser);
     }
   } catch (error) {
     // si hay error devuelve done(err)
-    return done(err);
+    return done(error);
   }
 };
 

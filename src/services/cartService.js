@@ -7,25 +7,25 @@ import { carritosDao as cartContainer } from "../daos/index.js";
 
 // obtengo todos los carritos
 const getAllCarts = async () => {
-  const allCarts = await cartContainer.getAllItems();
+  const allCarts = await cartContainer.getAll();
   return allCarts;
 };
 
 // creo un carrito
 const createNewCart = async () => {
-  const newCart = await cartContainer.createNewItem();
+  const newCart = await cartContainer.createNew();
   return newCart;
 };
 
 // borro un carrito
 const deleteCart = async (cartId) => {
-  await cartContainer.deleteItem(cartId);
+  await cartContainer.deleteById(cartId);
 };
 
 // obtengo el carrito y devuevo los productos
 const getCart = async (cartId) => {
-  const cart = await cartContainer.getItemById(cartId);
-  return { products: cart.products } ?? { products: [] };
+  const cart = await cartContainer.getById(cartId);
+  return { products: cart?.products } ?? { products: [] };
 };
 
 // agrego un producto
@@ -37,7 +37,7 @@ const addProduct = async (cartId, body) => {
 
   // busco el carrito al que debo agregar el producto
 
-  const cart = await cartContainer.getItemById(cartId);
+  const cart = await cartContainer.getById(cartId);
   // creo un nuevo producto para agregar
   const newProd = { id, timestamp, name, description, code, thumbnail, price: parseFloat(price), quantity };
 
@@ -53,7 +53,7 @@ const addProduct = async (cartId, body) => {
   }
 
   // actualizo la base de datos
-  await cartContainer.updateItem(cartId, cart);
+  await cartContainer.updateById(cartId, cart);
   // devuelvo la cart nueva
   return cart;
 };
@@ -61,12 +61,12 @@ const addProduct = async (cartId, body) => {
 // borro un producto de la cart
 const deleteProduct = async (cartId, prodId) => {
   // busco la cart
-  const cart = await cartContainer.getItemById(cartId);
+  const cart = await cartContainer.getById(cartId);
   // filtro para eliminar el producto con el id prodId
   const products = cart.products.filter((prod) => prod.id != prodId);
   cart.products = products;
   // actualizo la base de datos y devuelvo la cart
-  await cartContainer.updateItem(cartId, cart);
+  await cartContainer.updateById(cartId, cart);
   return cart;
 };
 

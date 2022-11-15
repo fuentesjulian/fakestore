@@ -7,13 +7,13 @@ import { productosDao as productContainer } from "../daos/index.js";
 
 // traigo un producto por id
 const getProductById = async (id) => {
-  const product = await productContainer.getItemById(id);
+  const product = await productContainer.getById(id);
   return product;
 };
 
 // traigo todos los productos
 const getAllProducts = async () => {
-  const allProducts = await productContainer.getAllItems();
+  const allProducts = await productContainer.getAll();
   return allProducts;
 };
 
@@ -24,7 +24,7 @@ const createNewProduct = async (body) => {
   const timestamp= Date.now()
   // checkeo que todas existan
   if (name && description && code && thumbnail && price && stock) {
-    const newProduct = await productContainer.createNewItem({ name, description, code, thumbnail, price: parseFloat(price), stock,timestamp });
+    const newProduct = await productContainer.createNew({ name, description, code, thumbnail, price: parseFloat(price), stock,timestamp });
     return newProduct;
   }
 };
@@ -36,14 +36,14 @@ const updateProduct = async (id, body) => {
   // checkeo que todas existan
   if (name && description && code && thumbnail && price && stock) {
     const newItemData = { name, description, code, thumbnail, price: parseFloat(price), stock };
-    const updatedProduct = await productContainer.updateItem(id, newItemData);
+    const updatedProduct = await productContainer.updateById(id, newItemData);
     return updatedProduct;
   }
 };
 
 // elimino un producto
 const deleteProduct = async (id) => {
-  await productContainer.deleteItem(id);
+  await productContainer.deteleteById(id);
 };
 
 export { getProductById, getAllProducts, createNewProduct, updateProduct, deleteProduct };

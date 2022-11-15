@@ -2,7 +2,7 @@
 import { isLoggedIn, isLoggedOut } from "../middlewares/authentication.js";
 import { signup } from "../services/userService.js";
 
-export const configAuthRouter = (authRouter, passport) => {
+export const configAuthRouter = (authRouter, upload, passport) => {
   authRouter
     .get("/login", isLoggedOut, (req, res) => {
       const loginError = "error" in req.query;
@@ -32,10 +32,15 @@ export const configAuthRouter = (authRouter, passport) => {
       }
       res.render("signup", { msg });
     })
-    .post("/signup", isLoggedOut,passport.authenticate("signup", {
-      successRedirect: "/",
-      failureRedirect: "/signup?error",
-    }))
+    .post(
+      "/signup",
+      isLoggedOut,
+      upload.single("avatar"),
+      passport.authenticate("signup", {
+        successRedirect: "/",
+        failureRedirect: "/signup?error",
+      })
+    )
     .get("/logout", isLoggedIn, (req, res) => {
       // cargo temporalmente el nombre de la sesion
       const nombre = req.user.nombre;

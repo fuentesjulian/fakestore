@@ -9,13 +9,26 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// configuro la ruta estatica
+// configuro las rutas estatica
 app.use(express.static("public"));
-
+app.use("/uploads", express.static("uploads"));
 //--------------------------------------------
 // configuro sesion
-import session from "./middlewares/session.js"
+import session from "./middlewares/session.js";
 app.use(session);
+
+//--------------------------------------------
+// configuro multer
+import multer from "multer";
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + file.originalname);
+  },
+});
+const upload = multer({ storage: storage });
 
 //--------------------------------------------
 // configuro passport
@@ -34,19 +47,20 @@ app.set("view engine", "ejs");
 
 //--------------------------------------------
 // Middlewares de auth
-import {isLoggedIn} from "./middlewares/authentication.js"
+import { isLoggedIn } from "./middlewares/authentication.js";
 
 //--------------------------------------------
 // authRouter donde esta la estrategia de autenticacion
 const authRouter = express.Router();
 import { configAuthRouter } from "./routes/authRouter.js";
-configAuthRouter(authRouter, passport);
+configAuthRouter(authRouter, upload, passport);
 app.use("/", authRouter);
 
+import profileRouter from "./routes/profileRouter.js";
 // configuro los routers
 app.use("/api/productos", productRouter);
 app.use("/api/carrito", cartRouter);
-
+app.use("/profile", profileRouter);
 // si usa otra ruta arrojo error
 app.all("*", validRouteService);
 
