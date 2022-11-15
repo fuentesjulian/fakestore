@@ -25,8 +25,8 @@
   <body>
     <div class="container-sm formulario">
       <h1>Signup</h1>
-      <% if (locals.userError) { %>
-      <p class="error"><%= userError %></p>
+      <% if (locals.msg) { %>
+      <p class="error"><%= msg %></p>
       <%} %>
 
       <form action="/signup" method="post">

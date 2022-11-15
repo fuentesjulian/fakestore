@@ -13,8 +13,7 @@ export const login = async (email, password, done) => {
     if (user) {
       // si el user existe comparo la contraseña
       const isValidPassword = await bcrypt.compare(password, user.password);
-      if (!isValidPassword)
-        return done(null, false);
+      if (!isValidPassword) return done(null, false);
       return done(null, user);
     } else {
       // si el user no existe devuelve done(null, false)
@@ -26,14 +25,14 @@ export const login = async (email, password, done) => {
   }
 };
 
-export const signup = async (req, res) => {
-  const { email, password, nombre, direccion, edad, telefono, avatar } =
+export const signup = async (req, email, password, done) => {
+  const { nombre, direccion, edad, telefono, avatar } =
     req.body;
   try {
     const user = await userContainer.getByField("email", email);
     if (user) {
       // si el user existe devuelve done(null, false)
-      return res.render("signup", { userError: "Error: el email ya existe" });
+      return done(null, false);
     } else {
       // si el user no existe y pudo registrarlo done(null, user)
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -47,11 +46,11 @@ export const signup = async (req, res) => {
         avatar,
       };
       const newUser = await userContainer.createNew(userData);
-      return res.redirect("/login");
+      return done(null, newUser);
     }
   } catch (error) {
     // si hay error devuelve done(err)
-    return res.redirect("/server-error");
+    return done(err);
   }
 };
 

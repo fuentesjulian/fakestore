@@ -12,7 +12,6 @@ export const configAuthRouter = (authRouter, passport) => {
       } else {
         msg = false;
       }
-
       res.render("login", { msg });
     })
     .post(
@@ -24,9 +23,19 @@ export const configAuthRouter = (authRouter, passport) => {
       })
     )
     .get("/signup", isLoggedOut, (req, res) => {
-      res.render("signup");
+      const signupError = "error" in req.query;
+      let msg;
+      if (signupError) {
+        msg = "Hubo un error en el registro, por favor verifica los datos";
+      } else {
+        msg = false;
+      }
+      res.render("signup", { msg });
     })
-    .post("/signup", isLoggedOut, signup)
+    .post("/signup", isLoggedOut,passport.authenticate("signup", {
+      successRedirect: "/",
+      failureRedirect: "/signup?error",
+    }))
     .get("/logout", isLoggedIn, (req, res) => {
       // cargo temporalmente el nombre de la sesion
       const nombre = req.user.nombre;

@@ -4,10 +4,12 @@ import { Strategy as LocalStrategy } from "passport-local";
 const passportConfig = (passport, userService) => {
   const strategyOptions = { usernameField: "email" };
   // dos estrategias, signup y login
-  //const signupStrategy = new LocalStrategy(strategyOptions, userService.signup);
+  const signupStrategy = new LocalStrategy(
+    { usernameField: "email", passReqToCallback: true },
+    userService.signup
+  );
   const loginStrategy = new LocalStrategy(strategyOptions, userService.login);
-
-  //passport.use("signup", signupStrategy);
+  passport.use("signup", signupStrategy);
   passport.use("login", loginStrategy);
 
   // creo las funciones de serialize/deserialize user
