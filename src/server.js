@@ -64,6 +64,8 @@ app.use("/api/productos", productRouter);
 app.use("/api/carrito", cartRouter);
 app.use("/profile", profileRouter);
 app.use("/item", itemRouter);
+import checkoutRouter from "./routes/checkoutRouter.js";
+app.use("/checkout", checkoutRouter);
 app.use("/", appRouter);
 
 // si usa otra ruta arrojo error

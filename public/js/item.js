@@ -2,6 +2,10 @@ import { cartApi } from "./cartApi.js";
 import { productsApi } from "./productsApi.js";
 
 const cartCount = document.getElementById("cartCount");
+cartCount.onclick = () => {
+  location.href = "/cart";
+};
+
 
 const initView = async (itemId, stock) => {
   let cart = await cartApi.createCart();

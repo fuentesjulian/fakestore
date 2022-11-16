@@ -89,6 +89,13 @@ const deleteProduct = async (cartId, prodId) => {
   return cart;
 };
 
+const billCart = async (cartId) => {
+  const cart = await cartContainer.getById(cartId);
+  cart.status = "closed";
+  await cartContainer.updateById(cartId, cart);
+  return cart;
+};
+
 export {
   getAllCarts,
   createNewCart,
@@ -97,4 +104,5 @@ export {
   addProduct,
   deleteProduct,
   handleCart,
+  billCart,
 };

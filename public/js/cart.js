@@ -7,6 +7,19 @@ const createCartView = async () => {
   updateCartCount(cartData);
   const cartHtml = document.getElementById("cart");
   cartHtml.innerText = JSON.stringify(cartData);
+
+  const checkoutBtn = document.getElementById("checkout");
+  checkoutBtn.onclick = () => {
+    checkout(cartData.id);
+  };
+};
+
+const checkout = async (cartId) => {
+  const options = { method: "POST" };
+  return fetch(`/checkout/${cartId}`, options).then((data) => {
+    console.log(data)
+   location.href = `/checkout/${cartId}`;
+  });
 };
 
 const updateCartCount = (cart) => {

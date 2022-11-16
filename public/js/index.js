@@ -4,6 +4,10 @@ import { cartApi } from "./cartApi.js";
 const prods = document.getElementById("prods");
 const cartCount = document.getElementById("cartCount");
 
+cartCount.onclick = () => {
+  location.href = "/cart";
+};
+
 let cartId;
 let productData = [];
 let cartData = [];
@@ -107,7 +111,7 @@ function createCartModal(cart) {
   /* primero checkeo si el carrito esta vacio */
   if (cart.products?.length > 0) {
     /* #OPTIMIZACION con destructuracion */
-    console.log(cart.products);
+
     cart.products.forEach(({ id, quantity, thumbnail, name, price }) => {
       const itemCarrito = document.createElement("li");
       itemCarrito.className = "list-group-item";
