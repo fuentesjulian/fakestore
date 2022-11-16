@@ -1,9 +1,12 @@
+import dotenv from "dotenv"
+dotenv.config()
+
 export default {
   fileSystem: {
     path: "./DB"
   },
   mongodb: {
-    cnxStr: "mongodb://localhost:27017/ecommerce",
+    cnxStr: process.env.MONGOBD_CONNECTION_STRING,
     options: {
       useNewUrlParser: true,
       useUnifiedTopology: true
