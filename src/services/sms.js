@@ -3,7 +3,6 @@ import twilio from "twilio";
 const SID = "ACdb90657e9c8fc2879561572fa37ca125";
 const TOKEN = "f43ac2a1c24594e935cd49887af0ecea";
 const PHONE = "+19136002332";
-const TO = "+5491157975361";
 
 const client = twilio(SID, TOKEN);
 export const enviarPedido = async (userPhone, cartId) => {
