@@ -27,5 +27,8 @@ export const productsApi = {
         method: "DELETE"
       };
       return fetch(`/api/productos/${idProd}`, options);
+    },
+    getById: (idProd) => {
+      return fetch(`/api/productos/${idProd}`).then((data) => data.json());
     }
   };

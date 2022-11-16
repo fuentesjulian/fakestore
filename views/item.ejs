@@ -26,30 +26,65 @@
     <header><img src="../img/logo.PNG" alt="" /></header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Admin
-              </a>              
-              <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+              <%= nombre %>
+              </a>
+              <ul
+                class="dropdown-menu"
+                aria-labelledby="navbarDarkDropdownMenuLink"
+              >
                 <li><a class="dropdown-item" href="/profile">Perfil</a></li>
-                <li><a class="dropdown-item" href="admin/nuevo.html">Crear producto</a></li>
-                <li><a class="dropdown-item" href="admin/editar.html">Editar productos</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="admin/carritos.html">Ver carritos</a></li>
-                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <a class="dropdown-item" href="admin/nuevo.html"
+                    >Crear producto</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="admin/editar.html"
+                    >Editar productos</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="admin/carritos.html"
+                    >Ver carritos</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
                 <li><a class="dropdown-item" href="/logout">Logout</a></li>
               </ul>
             </li>
           </ul>
-          <div id="cartCount" data-bs-toggle="modal" data-bs-target="#modalCarrito"><i class="bi bi-cart"></i> 0</div>
+          <div
+            id="cartCount"
+            data-bs-toggle="modal"
+            data-bs-target="#modalCarrito"
+          >
+            <i class="bi bi-cart"></i> 0
+          </div>
         </div>
       </div>
     </nav>
@@ -66,12 +101,26 @@
         <div class="col">
           <h2><%= productData.name %></h2>
           <p><b>Codigo</b> <%= productData.code %></p>
+          <p><b>ID</b> <span id="itemId"><%= productData.id %></span></p>
           <p><b>Precio</b> $<%= productData.price %></p>
-          <p><b>Stock</b> <span id="stock"><%= productData.stock %></span></p>
+          <p>
+            <b>Stock</b> <span id="itemStock"><%= productData.stock %></span>
+          </p>
           <p><%= productData.description %></p>
-          <div class="button-container"><button class="btn btn-primary" id="btnMenos">-</button><div class="cantidad-pedido" id="cantidad">1</div><button class="btn btn-primary" id="btnMas">+</button></div>
-        
-          <button class="btn btn-primary agregar">Agregar a carrito</button>
+          <div class="center">
+          <div class="button-container">
+            <button class="btn btn-primary" id="btnMenos">-</button>
+            <div class="cantidad-pedido" id="cantidad">1</div>
+            <button class="btn btn-primary" id="btnMas">+</button>
+          </div>
+          
+            <button class="btn btn-primary agregar" id="confirmar">
+              Agregar a carrito
+            </button>
+            <button class="btn btn-danger agregar" id="eliminar">
+              Quitar del carrito
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -83,6 +132,7 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
-    <script src="../js/item.js"></script>
+
+    <script type="module" src="../js/item.js"></script>
   </body>
 </html>

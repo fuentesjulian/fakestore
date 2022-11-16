@@ -168,14 +168,26 @@ footer {
   color: rgb(216, 22, 22);
 }
 
-.item{
+.item {
   margin-top: 1em;
   max-width: 40em;
 }
 
-.button-container{display: flex;}
+.button-container {
+  display: flex;
+  justify-content: center;
+}
 
-.cantidad-pedido{line-height: 2em; margin: 0.2em; width: 1em;}
+.cantidad-pedido {
+  line-height: 2em;
+  margin: 0.2em;
+  width: 1em;
+}
 
-.agregar{
-  margin-top: 1em;}
+.agregar {
+  margin-top: 1em;
+}
+
+.center {
+  text-align: center;
+}

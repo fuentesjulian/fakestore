@@ -58,11 +58,13 @@ app.use("/", authRouter);
 
 import profileRouter from "./routes/profileRouter.js";
 import itemRouter from "./routes/itemRouter.js";
+import appRouter from "./routes/appRouter.js";
 // configuro los routers
 app.use("/api/productos", productRouter);
 app.use("/api/carrito", cartRouter);
 app.use("/profile", profileRouter);
-app.use("/item", itemRouter)
+app.use("/item", itemRouter);
+app.use("/", appRouter);
 
 // si usa otra ruta arrojo error
 app.all("*", validRouteService);

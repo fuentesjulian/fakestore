@@ -1,39 +1,96 @@
-const btnMenos = document.getElementById("btnMenos");
-const btnMas = document.getElementById("btnMas");
-const htmlCantidad = document.getElementById("cantidad");
-const htmlStock = document.getElementById("stock");
-let cantidad = 1;
-let stock = parseInt(htmlStock.innerText);
+import { cartApi } from "./cartApi.js";
+import { productsApi } from "./productsApi.js";
 
-btnMas.onclick = () => {
-  cantidad++;
-  htmlCantidad.innerText = cantidad;
-  handleButtons();
-};
+const cartCount = document.getElementById("cartCount");
 
-btnMenos.onclick = () => {
-  cantidad--;
-  htmlCantidad.innerText = cantidad;
-  handleButtons();
-};
+const initView = async (itemId, stock) => {
+  let cart = await cartApi.createCart();
+  const product = await productsApi.getById(itemId);
+  updateCartCount(cart);
 
-const handleButtons = () => {
-  if (cantidad === 1) {
-    btnMenos.disabled = true;
+  let cantidad = 0;
+
+  cart.products?.forEach((prod) => {
+    if (itemId === prod.id) {
+      cantidad = prod.quantity;
+    }
+  });
+
+  const btnConfirmar = document.getElementById("confirmar");
+  const btnEliminar = document.getElementById("eliminar");
+
+  if (cantidad === 0) {
+    btnConfirmar.innerText = "Agregar a carrito";
+    btnEliminar.disabled = true;
+    cantidad = 1;
   } else {
-    btnMenos.disabled = false;
+    btnConfirmar.innerText = "Actualizar cantidad";
   }
 
-  if (cantidad === stock) {
-    btnMas.disabled = true;
-  } else {
-    btnMas.disabled = false;
-  }
-};
+  const htmlCantidad = document.getElementById("cantidad");
+  const btnMenos = document.getElementById("btnMenos");
+  const btnMas = document.getElementById("btnMas");
+  htmlCantidad.innerText = cantidad;
 
-const setItemView = () => {
-  stock = parseInt(htmlStock.innerText);
+  btnMas.onclick = () => {
+    cantidad++;
+    htmlCantidad.innerText = cantidad;
+    handleButtons();
+  };
+
+  btnMenos.onclick = () => {
+    cantidad--;
+    htmlCantidad.innerText = cantidad;
+    handleButtons();
+  };
+
+  btnConfirmar.onclick = async () => {
+    const prod = { ...product, quantity: cantidad };
+    await cartApi.postProd(cart.id, prod);
+    cart = await cartApi.createCart();
+    btnEliminar.disabled = false;
+    btnConfirmar.innerText="Actualizar cantidad"
+    updateCartCount(cart);
+  };
+
+  btnEliminar.onclick = async () => {
+    await cartApi.deleteProd(cart.id, product.id);
+    cart = await cartApi.createCart();
+    btnEliminar.disabled = true;
+    btnConfirmar.innerText="Agregar a carrito"
+    updateCartCount(cart);
+  };
+
+  const handleButtons = () => {
+    if (cantidad === 1) {
+      btnMenos.disabled = true;
+    } else {
+      btnMenos.disabled = false;
+    }
+
+    if (cantidad === stock) {
+      btnMas.disabled = true;
+    } else {
+      btnMas.disabled = false;
+    }
+  };
+
   handleButtons();
 };
 
-document.addEventListener("DOMContentLoaded", setItemView());
+/* corro la funcion de actualizarHTML cuando carga el DOM */
+document.addEventListener("DOMContentLoaded", () => {
+  const itemId = document.getElementById("itemId").innerText;
+  const itemStock = parseInt(document.getElementById("itemStock").innerText);
+  initView(itemId, itemStock);
+});
+
+const updateCartCount = (cart) => {
+  let quantity = 0;
+  if (cart.products?.length > 0)
+    cart.products.forEach((product) => {
+      quantity += product.quantity;
+    });
+
+  cartCount.innerHTML = `<i class="bi bi-cart"></i> ${quantity}`;
+};
