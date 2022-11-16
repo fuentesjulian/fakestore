@@ -1,0 +1,13 @@
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+    "email": "fuentesjuli@gmail.com",
+    "password": "supersecret"
+}
+
+###
+GET http://localhost:8080/
+
+###
+GET http://localhost:8080/logout
