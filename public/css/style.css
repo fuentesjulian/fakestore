@@ -167,3 +167,15 @@ footer {
 .error {
   color: rgb(216, 22, 22);
 }
+
+.item{
+  margin-top: 1em;
+  max-width: 40em;
+}
+
+.button-container{display: flex;}
+
+.cantidad-pedido{line-height: 2em; margin: 0.2em; width: 1em;}
+
+.agregar{
+  margin-top: 1em;}

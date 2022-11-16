@@ -57,10 +57,13 @@ configAuthRouter(authRouter, upload, passport);
 app.use("/", authRouter);
 
 import profileRouter from "./routes/profileRouter.js";
+import itemRouter from "./routes/itemRouter.js";
 // configuro los routers
 app.use("/api/productos", productRouter);
 app.use("/api/carrito", cartRouter);
 app.use("/profile", profileRouter);
+app.use("/item", itemRouter)
+
 // si usa otra ruta arrojo error
 app.all("*", validRouteService);
 

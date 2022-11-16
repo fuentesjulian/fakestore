@@ -9,7 +9,8 @@ const getAllCarts = async (req, res) => {
 
 const createNewCart = async (req, res) => {
   // creo un cart nuevo y traigo el id
-  const newCart = await cartService.createNewCart();
+  console.log(req.user.id)
+  const newCart = await cartService.createNewCart({uid: req.user.id, status: "open"});
   res.send(newCart);
 };
 

@@ -12,8 +12,8 @@ const getAllCarts = async () => {
 };
 
 // creo un carrito
-const createNewCart = async () => {
-  const newCart = await cartContainer.createNew();
+const createNewCart = async (data) => {
+  const newCart = await cartContainer.createNew(data);
   return newCart;
 };
 
