@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import * as objectUtils from "../utils/objectUtils.js";
 import * as dotenv from "dotenv";
+import logger from "../log/logger.js";
 
 const options = {
   useNewUrlParser: true,
@@ -27,7 +28,7 @@ export default class MongoDbContainer {
         return item;
       }
     } catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   }
 
@@ -44,7 +45,7 @@ export default class MongoDbContainer {
         return plainData;
       }
     } catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   }
 
@@ -59,13 +60,13 @@ export default class MongoDbContainer {
         return item;
       }
     } catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   }
 
   async getByObjCriteria(obj) {
     try {
-      const data = await this.model.findOne(obj)
+      const data = await this.model.findOne(obj);
       const plainData = objectUtils.returnPlainObj(data);
       if (plainData === null) {
         return plainData;
@@ -74,7 +75,7 @@ export default class MongoDbContainer {
         return item;
       }
     } catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   }
 
@@ -85,7 +86,7 @@ export default class MongoDbContainer {
       const newItem = objectUtils.renameField(plainData, "_id", "id");
       return newItem;
     } catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   }
 
@@ -93,7 +94,7 @@ export default class MongoDbContainer {
     try {
       await this.model.updateOne({ _id: id }, { $set: { ...itemData } });
     } catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   }
 
@@ -101,7 +102,7 @@ export default class MongoDbContainer {
     try {
       await this.model.deleteOne({ _id: id });
     } catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   }
 
@@ -109,7 +110,7 @@ export default class MongoDbContainer {
     try {
       await this.model.deleteMany({});
     } catch (error) {
-      console.log(error);
+      logger.error(error);
     }
   }
 }

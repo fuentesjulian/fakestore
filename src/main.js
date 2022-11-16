@@ -3,6 +3,7 @@ import app from "./server.js";
 import Yargs from "yargs";
 import cluster from "cluster";
 import os from "os";
+import logger from "./log/logger.js";
 
 const numCPUs = os.cpus().length;
 
@@ -17,11 +18,13 @@ const runCluster = (port) => {
   } else {
     // corro app
     const server = app.listen(port, () => {
-      console.log(
-        `Servidor http escuchando en el puerto ${server.address().port} en modo cluster`
+      logger.info(
+        `Servidor http escuchando en el puerto ${
+          server.address().port
+        } en modo cluster`
       );
     });
-    server.on("error", (error) => console.log(`Error en servidor ${error}`));
+    server.on("error", (error) => logger.error(`Error en servidor ${error}`));
   }
 };
 
@@ -31,11 +34,13 @@ const runCluster = (port) => {
 const runNormal = (port) => {
   // corro app
   const server = app.listen(port, () => {
-    console.log(
-      `Servidor http escuchando en el puerto ${server.address().port} en modo normal`
+    logger.info(
+      `Servidor http escuchando en el puerto ${
+        server.address().port
+      } en modo normal`
     );
   });
-  server.on("error", (error) => console.log(`Error en servidor ${error}`));
+  server.on("error", (error) => logger.error(`Error en servidor ${error}`));
 };
 
 // corro app

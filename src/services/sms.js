@@ -1,4 +1,5 @@
 import twilio from "twilio";
+import logger from "../log/logger.js";
 
 const SID = "ACdb90657e9c8fc2879561572fa37ca125";
 const TOKEN = "f43ac2a1c24594e935cd49887af0ecea";
@@ -15,7 +16,6 @@ export const enviarPedido = async (userPhone, cartId) => {
   try {
     const msg = await client.messages.create(options);
   } catch (error) {
-    console.log(error);
+    logger.error(error);
   }
 };
-
