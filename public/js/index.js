@@ -35,7 +35,14 @@ function loadProducts(products) {
     ({ name, code, thumbnail, price, stock, description, id }) => {
       /* agrego cada producto al articulo dentro del body en el html */
       const plantilla = document.createElement("div");
-      plantilla.className = "card";
+      let enabled = "";
+      if (stock === 0) {
+        enabled = "card-disabled";
+      } else {
+        enabled = "card-enabled";
+      }
+      plantilla.id = `card-${id}`;
+      plantilla.className = `card ${enabled}`;
       plantilla.innerHTML = `
       <h5 class="titulo">${name} - ${code}</h5>
       <div class="imagen"><img src="${thumbnail}" class="card-img-top" alt="..."></div>
@@ -44,17 +51,14 @@ function loadProducts(products) {
         <p class="card-text descripcion">${description}</p>
         <p class="card-text">ID: ${id}</p>
         <p class="card-text" id="stock-${id}">Stock: ${stock}</p>
-        <button class="btn btn-dark" id="add-${id}">Agregar</button>
       </div>`;
       prods.appendChild(plantilla);
-      /* cuando hago click corro la instrucion agregarProducto */
-      const addBtn = document.getElementById(`add-${id}`);
-      if (stock === 0) {
-        addBtn.disabled = true;
+      const cardBtn = document.getElementById(`card-${id}`);
+      if (stock > 0) {
+        cardBtn.onclick = () => {
+          location.href = `/item/${id}`;
+        };
       }
-      addBtn.onclick = () => {
-        addProd(id, cartId);
-      };
     }
   );
 }
@@ -88,7 +92,7 @@ const addProd = async (prodId, cartId) => {
 
 const updateCartCount = (cart) => {
   let quantity = 0;
-  if (cartData.products?.length > 0)
+  if (cart.products?.length > 0)
     cart.products.forEach((product) => {
       quantity += product.quantity;
     });

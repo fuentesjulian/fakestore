@@ -191,3 +191,15 @@ footer {
 .center {
   text-align: center;
 }
+
+.card-enabled:hover{
+  cursor: pointer;
+}
+
+.card-disabled:hover{
+  cursor: not-allowed;
+}
+
+.card-disabled{
+  opacity: 0.5;
+}
