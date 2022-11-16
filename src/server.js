@@ -62,11 +62,11 @@ import appRouter from "./routes/appRouter.js";
 // configuro los routers
 app.use("/api/productos", productRouter);
 app.use("/api/carrito", cartRouter);
-app.use("/profile", profileRouter);
-app.use("/item", itemRouter);
+app.use("/profile", isLoggedIn, profileRouter);
+app.use("/item", isLoggedIn, itemRouter);
 import checkoutRouter from "./routes/checkoutRouter.js";
-app.use("/checkout", checkoutRouter);
-app.use("/", appRouter);
+app.use("/checkout", isLoggedIn, checkoutRouter);
+app.use("/", isLoggedIn, appRouter);
 
 // si usa otra ruta arrojo error
 app.all("*", validRouteService);

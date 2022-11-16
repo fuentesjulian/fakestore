@@ -6,8 +6,13 @@ const createCartView = async () => {
   cartData = await cartApi.createCart();
   updateCartCount(cartData);
   const cartHtml = document.getElementById("cart");
-  cartHtml.innerText = JSON.stringify(cartData);
+  
 
+  let htmlOutput = `<h2>Carrito: </h2>`
+  cartData.products.forEach(prod=>{
+      htmlOutput += `<p>${prod.code} ${prod.name} --> $ ${prod.price} x ${prod.quantity} unidades</p>`
+  })
+  cartHtml.innerHTML = htmlOutput;
   const checkoutBtn = document.getElementById("checkout");
   checkoutBtn.onclick = () => {
     checkout(cartData.id);
@@ -17,7 +22,7 @@ const createCartView = async () => {
 const checkout = async (cartId) => {
   const options = { method: "POST" };
   return fetch(`/checkout/${cartId}`, options).then((data) => {
-    console.log(data)
+
    location.href = `/checkout/${cartId}`;
   });
 };

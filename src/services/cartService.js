@@ -89,10 +89,12 @@ const deleteProduct = async (cartId, prodId) => {
   return cart;
 };
 
-const billCart = async (cartId) => {
+const billCart = async (cartId, userId) => {
   const cart = await cartContainer.getById(cartId);
-  cart.status = "closed";
-  await cartContainer.updateById(cartId, cart);
+  if (cart.uid === userId) {
+    cart.status = "closed";
+    await cartContainer.updateById(cartId, cart);
+  }
   return cart;
 };
 

@@ -3,18 +3,22 @@ import express from "express";
 const { Router } = express;
 const checkoutRouter = new Router();
 import * as cartService from "../services/cartService.js";
+import * as emailer from "../services/emailer.js";
+import * as sms from "../services/sms.js";
 
 checkoutRouter
   .get("/:id", async (req, res) => {
     const nombre = req.user.nombre;
     const cartId = req.params.id;
     const cart = await cartService.getCart(cartId);
-    res.render("checkout", { nombre, cart, cartId});
+    res.render("checkout", { nombre, cart, cartId });
   })
   .post("/:id", async (req, res) => {
-    console.log("checkout");
     const cartId = req.params.id;
-    const cart = await cartService.billCart(cartId);
+    const userId = req.user.id;
+    const cart = await cartService.billCart(cartId, userId);
+    emailer.nuevoPedido(req.user, cart);
+    sms.enviarPedido(req.user.telefono, cartId);
     res.send(cart);
   });
 

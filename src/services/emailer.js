@@ -3,13 +3,13 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
-  service: "gmail", 
-  host: 'smtp.gmail.com',
+  service: "gmail",
+  host: "smtp.gmail.com",
   port: 587,
   auth: {
-      user: 'develoopa.test@gmail.com',
-      pass: 'mawalsdfearyemgh'
-  }
+    user: "develoopa.test@gmail.com",
+    pass: "mawalsdfearyemgh",
+  },
 });
 
 export const nuevoRegistro = async (user) => {
@@ -29,6 +29,16 @@ export const nuevoRegistro = async (user) => {
   const msg = await transporter.sendMail(mailOptions);
 };
 
-
-
-
+export const nuevoPedido = async (user, cart) => {
+  let htmlContent = `<h1>Pedido ${cart.id} ingresado de ${user.nombre}</h1>`;
+  cart.products.forEach((prod) => {
+    htmlContent += `<p>${prod.code} ${prod.name} --> $ ${prod.price} x ${prod.quantity} unidades</p>`;
+  });
+  const mailOptions = {
+    from: "Loopa SA",
+    to: process.env.SERVER_EMAIL,
+    subject: `Nuevo pedido de ${user.nombre} - ${user.email}`,
+    html: htmlContent,
+  };
+  const msg = await transporter.sendMail(mailOptions);
+};
