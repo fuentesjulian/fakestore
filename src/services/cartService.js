@@ -28,18 +28,37 @@ const getCart = async (cartId) => {
   return { products: cart?.products } ?? { products: [] };
 };
 
+const handleCart = async (data) => {
+  const cart = await cartContainer.getByObjCriteria(data);
+  if (!cart) {
+    const newCart = await createNewCart(data);
+    return newCart;
+  }
+  return cart;
+};
+
 // agrego un producto
 const addProduct = async (cartId, body) => {
   const product = body.product;
 
   // checkeo que el producto tenga todas las variables necesarias
-  const { id, timestamp, name, description, code, thumbnail, price, quantity } = product;
+  const { id, timestamp, name, description, code, thumbnail, price, quantity } =
+    product;
 
   // busco el carrito al que debo agregar el producto
 
   const cart = await cartContainer.getById(cartId);
   // creo un nuevo producto para agregar
-  const newProd = { id, timestamp, name, description, code, thumbnail, price: parseFloat(price), quantity };
+  const newProd = {
+    id,
+    timestamp,
+    name,
+    description,
+    code,
+    thumbnail,
+    price: parseFloat(price),
+    quantity,
+  };
 
   // si la cart tiene productos tengo que revisar si ya tengo ese producto en la cart para actualizar
   if (cart.products) {
@@ -70,4 +89,12 @@ const deleteProduct = async (cartId, prodId) => {
   return cart;
 };
 
-export { getAllCarts, createNewCart, deleteCart, getCart, addProduct, deleteProduct };
+export {
+  getAllCarts,
+  createNewCart,
+  deleteCart,
+  getCart,
+  addProduct,
+  deleteProduct,
+  handleCart,
+};

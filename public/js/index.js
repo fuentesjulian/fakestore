@@ -9,17 +9,11 @@ let productData = [];
 let cartData = [];
 
 const getData = async () => {
-  if (localStorage.getItem("cartId") != null) {
-    cartId = localStorage.getItem("cartId");
-    cartData = await cartApi.getProds(cartId);
-  } else {
-    cartData = await cartApi.createCart();
-    cartId = cartData.id ?? cartData._id;
-    cartData.products?.forEach((prod) => {
-      if (!prod.id) prod.id = prod._id;
-    });
-    localStorage.setItem("cartId", cartId);
-  }
+  cartData = await cartApi.createCart();
+  cartId = cartData.id ?? cartData._id;
+  cartData.products?.forEach((prod) => {
+    if (!prod.id) prod.id = prod._id;
+  });
 
   productData = await productsApi.get();
 
@@ -37,11 +31,12 @@ function loadProducts(products) {
   /* volvi a la version anterior de carga, es mas corto el codigo */
   prods.innerHTML = "";
   /* #OPTIMIZACION desestructuracion de parametros */
-  products.forEach(({ name, code, thumbnail, price, stock, description, id }) => {
-    /* agrego cada producto al articulo dentro del body en el html */
-    const plantilla = document.createElement("div");
-    plantilla.className = "card";
-    plantilla.innerHTML = `
+  products.forEach(
+    ({ name, code, thumbnail, price, stock, description, id }) => {
+      /* agrego cada producto al articulo dentro del body en el html */
+      const plantilla = document.createElement("div");
+      plantilla.className = "card";
+      plantilla.innerHTML = `
       <h5 class="titulo">${name} - ${code}</h5>
       <div class="imagen"><img src="${thumbnail}" class="card-img-top" alt="..."></div>
       <div class="card-body">
@@ -51,24 +46,25 @@ function loadProducts(products) {
         <p class="card-text" id="stock-${id}">Stock: ${stock}</p>
         <button class="btn btn-dark" id="add-${id}">Agregar</button>
       </div>`;
-    prods.appendChild(plantilla);
-    /* cuando hago click corro la instrucion agregarProducto */
-    const addBtn = document.getElementById(`add-${id}`);
-    if (stock === 0) {
-      addBtn.disabled = true;
+      prods.appendChild(plantilla);
+      /* cuando hago click corro la instrucion agregarProducto */
+      const addBtn = document.getElementById(`add-${id}`);
+      if (stock === 0) {
+        addBtn.disabled = true;
+      }
+      addBtn.onclick = () => {
+        addProd(id, cartId);
+      };
     }
-    addBtn.onclick = () => {
-      addProd(id, cartId);
-    };
-  });
+  );
 }
 
 const addProd = async (prodId, cartId) => {
   let product = productData.find((prod) => prod.id === prodId);
   if (cartData.products?.length > 0) {
-    
     if (cartData.products.some((prod) => prod.id === product.id)) {
-      const quantity = cartData.products.find((prod) => prod.id === product.id).quantity + 1;
+      const quantity =
+        cartData.products.find((prod) => prod.id === product.id).quantity + 1;
       product = { ...product, quantity: quantity };
     } else {
       product = { ...product, quantity: 1 };
@@ -84,8 +80,8 @@ const addProd = async (prodId, cartId) => {
     text: `${product.name} agregado a carrito`,
     duration: 1000,
     style: {
-      background: "linear-gradient(to right, #666666, #666666)"
-    }
+      background: "linear-gradient(to right, #666666, #666666)",
+    },
   }).showToast();
   createCartModal(cartData);
 };
@@ -107,7 +103,7 @@ function createCartModal(cart) {
   /* primero checkeo si el carrito esta vacio */
   if (cart.products?.length > 0) {
     /* #OPTIMIZACION con destructuracion */
-    console.log(cart.products)
+    console.log(cart.products);
     cart.products.forEach(({ id, quantity, thumbnail, name, price }) => {
       const itemCarrito = document.createElement("li");
       itemCarrito.className = "list-group-item";

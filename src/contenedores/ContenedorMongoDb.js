@@ -63,6 +63,21 @@ export default class MongoDbContainer {
     }
   }
 
+  async getByObjCriteria(obj) {
+    try {
+      const data = await this.model.findOne(obj)
+      const plainData = objectUtils.returnPlainObj(data);
+      if (plainData === null) {
+        return plainData;
+      } else {
+        const item = objectUtils.renameField(plainData, "_id", "id");
+        return item;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async createNew(itemData) {
     try {
       const data = await this.model.create(itemData);

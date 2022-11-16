@@ -1,6 +1,6 @@
 // controlador del cart, corre las funciones necesarias para cada response del router de carrito
 // traigo el servicios de carrito que corre las funciones de carrito
-import * as cartService from "../services/cartService.js"
+import * as cartService from "../services/cartService.js";
 
 const getAllCarts = async (req, res) => {
   const allCarts = await cartService.getAllCarts();
@@ -9,9 +9,17 @@ const getAllCarts = async (req, res) => {
 
 const createNewCart = async (req, res) => {
   // creo un cart nuevo y traigo el id
-  console.log(req.user.id)
-  const newCart = await cartService.createNewCart({uid: req.user.id, status: "open"});
-  res.send(newCart);
+  
+  // const newCart = await cartService.createNewCart({
+  //   uid: req.user.id,
+  //   status: "open",
+  // });
+  const cart = await cartService.handleCart({
+    uid: req.user.id,
+    status: "open",
+  });
+
+  res.send(cart);
 };
 
 const deleteCart = async (req, res) => {
@@ -35,8 +43,18 @@ const addProduct = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
   // elimino un producto
-  const cart = await cartService.deleteProduct(req.params.id, req.params.id_prod);
+  const cart = await cartService.deleteProduct(
+    req.params.id,
+    req.params.id_prod
+  );
   res.send(cart);
 };
 
-export { getAllCarts, createNewCart, deleteCart, getCart, addProduct, deleteProduct };
+export {
+  getAllCarts,
+  createNewCart,
+  deleteCart,
+  getCart,
+  addProduct,
+  deleteProduct,
+};
